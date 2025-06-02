@@ -17,6 +17,26 @@ import Image from "next/image"
 import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
+import { QuoteForm } from "@/components/quote-form"
+
+// Função para scroll suave
+const scrollToSection = (sectionId: string) => {
+  const element = document.getElementById(sectionId)
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth" })
+  }
+}
+
+// Função para abrir WhatsApp
+const openWhatsApp = () => {
+  const message = encodeURIComponent("Olá! Gostaria de saber mais sobre as casas modulares da Domus.")
+  window.open(`https://wa.me/5511999999999?text=${message}`, "_blank")
+}
+
+// Função para solicitar orçamento (scroll para formulário)
+const requestQuote = () => {
+  scrollToSection("contato")
+}
 
 export default function HomePage() {
   return (
@@ -27,18 +47,33 @@ export default function HomePage() {
           <Image src="/images/logo.png" alt="Domus Casas Modulares" width={150} height={50} className="h-10 w-auto" />
         </Link>
         <nav className="ml-auto flex gap-4 sm:gap-6">
-          <Link className="text-sm font-medium hover:text-orange-500 transition-colors" href="#como-trabalhamos">
+          <button
+            onClick={() => scrollToSection("como-trabalhamos")}
+            className="text-sm font-medium hover:text-orange-500 transition-colors cursor-pointer"
+          >
             Como Trabalhamos
-          </Link>
-          <Link className="text-sm font-medium hover:text-orange-500 transition-colors" href="#projetos">
+          </button>
+          <button
+            onClick={() => scrollToSection("projetos")}
+            className="text-sm font-medium hover:text-orange-500 transition-colors cursor-pointer"
+          >
             Projetos
-          </Link>
-          <Link className="text-sm font-medium hover:text-orange-500 transition-colors" href="#publicos">
+          </button>
+          <button
+            onClick={() => scrollToSection("publicos")}
+            className="text-sm font-medium hover:text-orange-500 transition-colors cursor-pointer"
+          >
             Nossos Públicos
+          </button>
+          <Link className="text-sm font-medium hover:text-orange-500 transition-colors" href="/trabalhe-conosco">
+            Trabalhe Conosco
           </Link>
-          <Link className="text-sm font-medium hover:text-orange-500 transition-colors" href="#contato">
+          <button
+            onClick={() => scrollToSection("contato")}
+            className="text-sm font-medium hover:text-orange-500 transition-colors cursor-pointer"
+          >
             Contato
-          </Link>
+          </button>
         </nav>
       </header>
 
@@ -71,13 +106,18 @@ export default function HomePage() {
             </div>
 
             <div className="flex flex-col gap-3 sm:flex-row">
-              <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 text-lg">
+              <Button
+                size="lg"
+                onClick={requestQuote}
+                className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 text-lg cursor-pointer"
+              >
                 Solicitar Orçamento
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-3 text-lg"
+                onClick={() => scrollToSection("projetos")}
+                className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-3 text-lg cursor-pointer"
               >
                 Ver Projetos
               </Button>
@@ -165,7 +205,10 @@ export default function HomePage() {
           </div>
 
           <div className="flex justify-center mt-10">
-            <Button className="bg-blue-900 hover:bg-blue-800 text-white px-8 py-6 text-lg">
+            <Button
+              onClick={requestQuote}
+              className="bg-blue-900 hover:bg-blue-800 text-white px-8 py-6 text-lg cursor-pointer"
+            >
               Saiba Mais Sobre Nosso Processo
             </Button>
           </div>
@@ -208,7 +251,9 @@ export default function HomePage() {
                   <span>Entrega em até 15 dias</span>
                 </li>
               </ul>
-              <Button className="bg-orange-500 hover:bg-orange-600">Solicitar Informações</Button>
+              <Button onClick={requestQuote} className="bg-orange-500 hover:bg-orange-600 cursor-pointer">
+                Solicitar Informações
+              </Button>
             </div>
             <div className="space-y-4">
               <Image
@@ -268,7 +313,9 @@ export default function HomePage() {
                 </div>
               </div>
               <div className="mt-auto pt-4">
-                <Button className="w-full bg-orange-500 hover:bg-orange-600">Quero Sair do Aluguel</Button>
+                <Button onClick={requestQuote} className="w-full bg-orange-500 hover:bg-orange-600 cursor-pointer">
+                  Quero Sair do Aluguel
+                </Button>
               </div>
             </div>
 
@@ -302,7 +349,9 @@ export default function HomePage() {
                 </div>
               </div>
               <div className="mt-auto pt-4">
-                <Button className="w-full bg-orange-500 hover:bg-orange-600">Plano para Investidores</Button>
+                <Button onClick={requestQuote} className="w-full bg-orange-500 hover:bg-orange-600 cursor-pointer">
+                  Plano para Investidores
+                </Button>
               </div>
             </div>
 
@@ -336,7 +385,9 @@ export default function HomePage() {
                 </div>
               </div>
               <div className="mt-auto pt-4">
-                <Button className="w-full bg-orange-500 hover:bg-orange-600">Solicitar Projeto</Button>
+                <Button onClick={requestQuote} className="w-full bg-orange-500 hover:bg-orange-600 cursor-pointer">
+                  Solicitar Projeto
+                </Button>
               </div>
             </div>
           </div>
@@ -434,10 +485,10 @@ export default function HomePage() {
                   <div>
                     <p className="font-semibold">Entre em contato:</p>
                     <a
-                      href="mailto:comercialdomusframe@gmail.com.br"
+                      href="mailto:comercialdomusframe@gmail.com"
                       className="text-orange-300 hover:text-orange-200 transition-colors"
                     >
-                      comercialdomusframe@gmail.com.br
+                      comercialdomusframe@gmail.com
                     </a>
                   </div>
                 </div>
@@ -463,13 +514,18 @@ export default function HomePage() {
               </div>
 
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white">
+                <Button
+                  size="lg"
+                  onClick={requestQuote}
+                  className="bg-orange-500 hover:bg-orange-600 text-white cursor-pointer"
+                >
                   Solicitar Orçamento
                 </Button>
                 <Button
                   size="lg"
                   variant="outline"
-                  className="border-white text-white hover:bg-white hover:text-gray-900"
+                  onClick={openWhatsApp}
+                  className="border-white text-white hover:bg-white hover:text-gray-900 cursor-pointer"
                 >
                   Falar no WhatsApp
                 </Button>
@@ -477,58 +533,7 @@ export default function HomePage() {
             </div>
 
             <div className="flex justify-center">
-              <div className="w-full max-w-md bg-white rounded-lg p-6 shadow-xl">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Solicite seu Orçamento</h3>
-                <form className="space-y-4">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                      Nome completo
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-                      placeholder="Seu nome"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                      E-mail
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-                      placeholder="seu@email.com"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                      Telefone
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-                      placeholder="(11) 99999-9999"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                      Mensagem
-                    </label>
-                    <textarea
-                      id="message"
-                      rows={3}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-                      placeholder="Conte-nos sobre seu projeto..."
-                    ></textarea>
-                  </div>
-                  <Button type="submit" className="w-full bg-orange-500 hover:bg-orange-600">
-                    Enviar Solicitação
-                  </Button>
-                </form>
-              </div>
+              <QuoteForm />
             </div>
           </div>
         </div>

@@ -27,12 +27,6 @@ const scrollToSection = (sectionId: string) => {
   }
 }
 
-// Função para abrir WhatsApp
-const openWhatsApp = () => {
-  const message = encodeURIComponent("Olá! Gostaria de saber mais sobre as casas modulares da Domus.")
-  window.open(`https://wa.me/5511999999999?text=${message}`, "_blank")
-}
-
 // Função para solicitar orçamento (scroll para formulário)
 const requestQuote = () => {
   scrollToSection("contato")
@@ -513,21 +507,13 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="flex flex-col gap-2 min-[400px]:flex-row">
+              <div className="flex justify-center">
                 <Button
                   size="lg"
                   onClick={requestQuote}
                   className="bg-orange-500 hover:bg-orange-600 text-white cursor-pointer"
                 >
                   Solicitar Orçamento
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  onClick={openWhatsApp}
-                  className="border-white text-white hover:bg-white hover:text-gray-900 cursor-pointer"
-                >
-                  Falar no WhatsApp
                 </Button>
               </div>
             </div>

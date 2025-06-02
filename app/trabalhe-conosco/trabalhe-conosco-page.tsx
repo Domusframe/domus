@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowLeft, Building2, Users, Briefcase, GraduationCap, Mail, Phone } from "lucide-react"
+import { ArrowLeft, Building2, Users, Mail, Phone } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { CurriculumForm } from "@/components/curriculum-form"
@@ -68,7 +68,7 @@ export default function TrabalheConoscoPage() {
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
             <div className="bg-white rounded-lg shadow-md p-6 border-t-4 border-orange-500 hover:shadow-lg transition-shadow">
               <div className="flex flex-col items-center text-center space-y-4">
                 <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center">
@@ -87,100 +87,6 @@ export default function TrabalheConoscoPage() {
                 <h3 className="text-xl font-bold text-blue-900">Equipe Unida</h3>
                 <p className="text-gray-600">Ambiente colaborativo com profissionais experientes e dedicados</p>
               </div>
-            </div>
-
-            <div className="bg-white rounded-lg shadow-md p-6 border-t-4 border-orange-500 hover:shadow-lg transition-shadow">
-              <div className="flex flex-col items-center text-center space-y-4">
-                <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center">
-                  <GraduationCap className="h-8 w-8 text-orange-500" />
-                </div>
-                <h3 className="text-xl font-bold text-blue-900">Crescimento</h3>
-                <p className="text-gray-600">Oportunidades de desenvolvimento profissional e capacitação contínua</p>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-lg shadow-md p-6 border-t-4 border-orange-500 hover:shadow-lg transition-shadow">
-              <div className="flex flex-col items-center text-center space-y-4">
-                <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center">
-                  <Briefcase className="h-8 w-8 text-orange-500" />
-                </div>
-                <h3 className="text-xl font-bold text-blue-900">Estabilidade</h3>
-                <p className="text-gray-600">Empresa em crescimento com projetos sólidos e visão de futuro</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Áreas de atuação */}
-      <section className="w-full py-12 md:py-24 lg:py-32">
-        <div className="container px-4 md:px-6 mx-auto">
-          <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
-            <div className="space-y-2 max-w-3xl">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-blue-900">Áreas de Atuação</h2>
-              <p className="text-gray-600 text-lg">Temos oportunidades em diversas áreas profissionais</p>
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <div className="bg-gray-50 rounded-lg p-6 hover:shadow-md transition-shadow">
-              <h3 className="text-xl font-bold text-blue-900 mb-3">Engenharia e Projetos</h3>
-              <ul className="space-y-2 text-gray-600">
-                <li>• Engenheiro Civil</li>
-                <li>• Arquiteto</li>
-                <li>• Projetista</li>
-                <li>• Calculista Estrutural</li>
-              </ul>
-            </div>
-
-            <div className="bg-gray-50 rounded-lg p-6 hover:shadow-md transition-shadow">
-              <h3 className="text-xl font-bold text-blue-900 mb-3">Produção e Qualidade</h3>
-              <ul className="space-y-2 text-gray-600">
-                <li>• Supervisor de Produção</li>
-                <li>• Técnico em Edificações</li>
-                <li>• Controlador de Qualidade</li>
-                <li>• Operador de Máquinas</li>
-              </ul>
-            </div>
-
-            <div className="bg-gray-50 rounded-lg p-6 hover:shadow-md transition-shadow">
-              <h3 className="text-xl font-bold text-blue-900 mb-3">Comercial e Vendas</h3>
-              <ul className="space-y-2 text-gray-600">
-                <li>• Consultor de Vendas</li>
-                <li>• Gerente Comercial</li>
-                <li>• Representante Técnico</li>
-                <li>• Atendimento ao Cliente</li>
-              </ul>
-            </div>
-
-            <div className="bg-gray-50 rounded-lg p-6 hover:shadow-md transition-shadow">
-              <h3 className="text-xl font-bold text-blue-900 mb-3">Administrativo</h3>
-              <ul className="space-y-2 text-gray-600">
-                <li>• Assistente Administrativo</li>
-                <li>• Analista Financeiro</li>
-                <li>• Recursos Humanos</li>
-                <li>• Compras e Suprimentos</li>
-              </ul>
-            </div>
-
-            <div className="bg-gray-50 rounded-lg p-6 hover:shadow-md transition-shadow">
-              <h3 className="text-xl font-bold text-blue-900 mb-3">Logística e Montagem</h3>
-              <ul className="space-y-2 text-gray-600">
-                <li>• Coordenador de Logística</li>
-                <li>• Montador</li>
-                <li>• Motorista</li>
-                <li>• Auxiliar de Montagem</li>
-              </ul>
-            </div>
-
-            <div className="bg-gray-50 rounded-lg p-6 hover:shadow-md transition-shadow">
-              <h3 className="text-xl font-bold text-blue-900 mb-3">Marketing e TI</h3>
-              <ul className="space-y-2 text-gray-600">
-                <li>• Analista de Marketing</li>
-                <li>• Designer Gráfico</li>
-                <li>• Desenvolvedor</li>
-                <li>• Suporte Técnico</li>
-              </ul>
             </div>
           </div>
         </div>

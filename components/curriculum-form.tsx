@@ -88,17 +88,16 @@ export function CurriculumForm() {
 
         <div>
           <label htmlFor="curriculum" className="block text-sm font-medium text-gray-700 mb-1">
-            Currículo (PDF) *
+            Currículo (PDF)
           </label>
           <input
             type="file"
             id="curriculum"
             name="curriculum"
             accept=".pdf"
-            required
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 file:mr-4 file:py-1 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-orange-50 file:text-orange-700 hover:file:bg-orange-100"
           />
-          <p className="text-xs text-gray-500 mt-1">Apenas arquivos PDF, máximo 5MB</p>
+          <p className="text-xs text-gray-500 mt-1">Apenas arquivos PDF, máximo 5MB (opcional)</p>
         </div>
 
         {state && (

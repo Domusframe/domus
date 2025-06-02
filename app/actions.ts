@@ -1,30 +1,35 @@
 "use server"
 
-export async function submitQuoteRequest(formData: FormData) {
-  const name = formData.get("name") as string
-  const email = formData.get("email") as string
-  const phone = formData.get("phone") as string
-  const message = formData.get("message") as string
+interface ActionResult {
+  success: boolean
+  message: string
+}
 
-  // Validação básica
-  if (!name || !email || !phone) {
-    return {
-      success: false,
-      message: "Por favor, preencha todos os campos obrigatórios.",
-    }
-  }
-
-  // Validação de email
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  if (!emailRegex.test(email)) {
-    return {
-      success: false,
-      message: "Por favor, insira um email válido.",
-    }
-  }
-
+export async function submitQuoteRequest(prevState: ActionResult | null, formData: FormData): Promise<ActionResult> {
   try {
-    // Simular envio de email (em produção, você usaria um serviço como Resend, SendGrid, etc.)
+    const name = formData.get("name") as string
+    const email = formData.get("email") as string
+    const phone = formData.get("phone") as string
+    const message = formData.get("message") as string
+
+    // Validação básica
+    if (!name || !email || !phone) {
+      return {
+        success: false,
+        message: "Por favor, preencha todos os campos obrigatórios.",
+      }
+    }
+
+    // Validação de email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email)) {
+      return {
+        success: false,
+        message: "Por favor, insira um email válido.",
+      }
+    }
+
+    // Simular envio de email
     console.log("Enviando solicitação de orçamento para comercialdomusframe@gmail.com")
     console.log({
       to: "comercialdomusframe@gmail.com",
@@ -57,48 +62,49 @@ export async function submitQuoteRequest(formData: FormData) {
   }
 }
 
-export async function submitCurriculum(formData: FormData) {
-  const name = formData.get("name") as string
-  const email = formData.get("email") as string
-  const phone = formData.get("phone") as string
-  const position = formData.get("position") as string
-  const experience = formData.get("experience") as string
-  const curriculum = formData.get("curriculum") as File
-
-  // Validação básica
-  if (!name || !email || !phone || !position || !curriculum) {
-    return {
-      success: false,
-      message: "Por favor, preencha todos os campos obrigatórios.",
-    }
-  }
-
-  // Validação de email
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  if (!emailRegex.test(email)) {
-    return {
-      success: false,
-      message: "Por favor, insira um email válido.",
-    }
-  }
-
-  // Validação do arquivo
-  if (curriculum.type !== "application/pdf") {
-    return {
-      success: false,
-      message: "Por favor, envie apenas arquivos PDF.",
-    }
-  }
-
-  if (curriculum.size > 5 * 1024 * 1024) {
-    // 5MB
-    return {
-      success: false,
-      message: "O arquivo deve ter no máximo 5MB.",
-    }
-  }
-
+export async function submitCurriculum(prevState: ActionResult | null, formData: FormData): Promise<ActionResult> {
   try {
+    const name = formData.get("name") as string
+    const email = formData.get("email") as string
+    const phone = formData.get("phone") as string
+    const position = formData.get("position") as string
+    const experience = formData.get("experience") as string
+    const curriculum = formData.get("curriculum") as File
+
+    // Validação básica
+    if (!name || !email || !phone || !position) {
+      return {
+        success: false,
+        message: "Por favor, preencha todos os campos obrigatórios.",
+      }
+    }
+
+    // Validação de email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email)) {
+      return {
+        success: false,
+        message: "Por favor, insira um email válido.",
+      }
+    }
+
+    // Validação do arquivo
+    if (curriculum && curriculum.size > 0) {
+      if (curriculum.type !== "application/pdf") {
+        return {
+          success: false,
+          message: "Por favor, envie apenas arquivos PDF.",
+        }
+      }
+
+      if (curriculum.size > 5 * 1024 * 1024) {
+        return {
+          success: false,
+          message: "O arquivo deve ter no máximo 5MB.",
+        }
+      }
+    }
+
     // Simular envio de email com anexo
     console.log("Enviando currículo para comercialdomusframe@gmail.com")
     console.log({
@@ -113,11 +119,10 @@ export async function submitCurriculum(formData: FormData) {
         Área de interesse: ${position}
         Experiência: ${experience || "Não informada"}
         
-        Arquivo: ${curriculum.name} (${(curriculum.size / 1024 / 1024).toFixed(2)}MB)
+        ${curriculum && curriculum.size > 0 ? `Arquivo: ${curriculum.name} (${(curriculum.size / 1024 / 1024).toFixed(2)}MB)` : "Nenhum arquivo anexado"}
         
         Data: ${new Date().toLocaleString("pt-BR")}
       `,
-      attachment: curriculum,
     })
 
     // Simular delay de envio

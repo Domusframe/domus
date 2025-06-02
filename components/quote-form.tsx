@@ -1,28 +1,62 @@
 "use client"
-import { useActionState } from "react"
+import { useState } from "react"
+import type React from "react"
+
 import { Button } from "@/components/ui/button"
-import { submitQuoteRequest } from "@/app/actions"
 
 export function QuoteForm() {
-  const [state, action, isPending] = useActionState(submitQuoteRequest, null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    setIsSubmitting(true)
+
+    // Simular um pequeno delay para melhor UX
+    setTimeout(() => {
+      setIsSubmitting(false)
+      setIsSubmitted(true)
+
+      // Reset após 5 segundos
+      setTimeout(() => {
+        setIsSubmitted(false)
+      }, 5000)
+    }, 1000)
+  }
+
+  if (isSubmitted) {
+    return (
+      <div className="w-full max-w-md bg-white rounded-lg p-6 shadow-xl">
+        <div className="text-center space-y-4">
+          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+            <svg className="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h3 className="text-xl font-bold text-gray-900">Solicitação Enviada!</h3>
+          <p className="text-gray-600">Recebemos sua solicitação de orçamento. Entraremos em contato em breve!</p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="w-full max-w-md bg-white rounded-lg p-6 shadow-xl">
       <h3 className="text-xl font-bold text-gray-900 mb-4">Solicite seu Orçamento</h3>
-      <form action={action} className="space-y-4">
+      <form action="https://formspree.io/f/mpwrzlyq" method="POST" className="space-y-4" onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="nome" className="block text-sm font-medium text-gray-700 mb-1">
             Nome completo *
           </label>
           <input
             type="text"
-            id="name"
-            name="name"
+            id="nome"
+            name="nome"
             required
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-            placeholder="Seu nome"
+            placeholder="Digite seu nome completo"
           />
         </div>
+
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
             E-mail *
@@ -33,53 +67,89 @@ export function QuoteForm() {
             name="email"
             required
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-            placeholder="seu@email.com"
+            placeholder="Digite seu e-mail"
           />
         </div>
+
         <div>
-          <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-            Telefone *
+          <label htmlFor="telefone" className="block text-sm font-medium text-gray-700 mb-1">
+            Telefone/WhatsApp *
           </label>
           <input
             type="tel"
-            id="phone"
-            name="phone"
+            id="telefone"
+            name="telefone"
             required
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-            placeholder="(11) 99999-9999"
-          />
-        </div>
-        <div>
-          <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-            Mensagem
-          </label>
-          <textarea
-            id="message"
-            name="message"
-            rows={3}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-            placeholder="Conte-nos sobre seu projeto..."
+            placeholder="(XX) XXXXX-XXXX"
           />
         </div>
 
-        {state && (
-          <div
-            className={`text-sm p-3 rounded-md ${
-              state.success
-                ? "bg-green-50 text-green-700 border border-green-200"
-                : "bg-red-50 text-red-700 border border-red-200"
-            }`}
+        <div>
+          <label htmlFor="local_obra" className="block text-sm font-medium text-gray-700 mb-1">
+            Local da obra *
+          </label>
+          <input
+            type="text"
+            id="local_obra"
+            name="local_obra"
+            required
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+            placeholder="Cidade/Estado"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="tipo_projeto" className="block text-sm font-medium text-gray-700 mb-1">
+            Tipo de projeto *
+          </label>
+          <select
+            id="tipo_projeto"
+            name="tipo_projeto"
+            required
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
           >
-            {state.message}
-          </div>
-        )}
+            <option value="" disabled>
+              Selecione
+            </option>
+            <option value="Residencial">Residencial</option>
+            <option value="Comercial">Comercial</option>
+            <option value="Outro">Outro</option>
+          </select>
+        </div>
+
+        <div>
+          <label htmlFor="metragem" className="block text-sm font-medium text-gray-700 mb-1">
+            Metragem aproximada
+          </label>
+          <input
+            type="text"
+            id="metragem"
+            name="metragem"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+            placeholder="Ex: 90m²"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="mensagem" className="block text-sm font-medium text-gray-700 mb-1">
+            Informações adicionais
+          </label>
+          <textarea
+            id="mensagem"
+            name="mensagem"
+            rows={4}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+            placeholder="Descreva seu projeto ou tire suas dúvidas"
+          />
+        </div>
 
         <Button
           type="submit"
-          disabled={isPending}
+          disabled={isSubmitting}
           className="w-full bg-orange-500 hover:bg-orange-600 disabled:opacity-50"
         >
-          {isPending ? "Enviando..." : "Enviar Solicitação"}
+          {isSubmitting ? "Enviando..." : "Solicitar Orçamento"}
         </Button>
       </form>
     </div>

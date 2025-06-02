@@ -24,13 +24,7 @@ export default function HomePage() {
       {/* Header */}
       <header className="px-4 lg:px-6 h-16 flex items-center border-b bg-white sticky top-0 z-50">
         <Link className="flex items-center justify-center" href="/">
-          <Image
-            src="/placeholder.svg?height=40&width=120"
-            alt="Domus Casas Modulares"
-            width={120}
-            height={40}
-            className="h-8 w-auto"
-          />
+          <Image src="/images/logo.png" alt="Domus Casas Modulares" width={150} height={50} className="h-10 w-auto" />
         </Link>
         <nav className="ml-auto flex gap-4 sm:gap-6">
           <Link className="text-sm font-medium hover:text-orange-500 transition-colors" href="#como-trabalhamos">
@@ -542,7 +536,10 @@ export default function HomePage() {
 
       {/* Footer */}
       <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t bg-white">
-        <p className="text-xs text-gray-500">© 2024 Domus Casas Modulares. Todos os direitos reservados.</p>
+        <div className="flex items-center">
+          <Image src="/images/logo.png" alt="Domus Casas Modulares" width={100} height={30} className="h-8 w-auto" />
+        </div>
+        <p className="text-xs text-gray-500 ml-4">© 2024 Domus Casas Modulares. Todos os direitos reservados.</p>
         <nav className="sm:ml-auto flex gap-4 sm:gap-6">
           <Link className="text-xs hover:underline underline-offset-4 text-gray-500" href="#">
             Termos de Serviço
